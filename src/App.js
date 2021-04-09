@@ -36,7 +36,6 @@ function ContactUs(){
         </div>
     )
 }
-
 function App() {
   return (
     <div className="App">
