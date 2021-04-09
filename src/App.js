@@ -2,23 +2,13 @@
 import './App.css';
 import React from 'react';
 import {Route, BrowserRouter, NavLink} from "react-router-dom";
+import {Menu} from "./components/Menu";
+import {PostList} from "./components/PostList";
 
-function Menu(){
-    return(
-        <nav className="nav">
-            <NavLink className="nav-link active" aria-current="page" to="/">Главная</NavLink>
-            <NavLink className="nav-link" to="/about">О нас</NavLink>
-            <NavLink className="nav-link" to="/contact-us">Контакты</NavLink>
-        </nav>
-    )
-}
 
-function Main(){
-    return(
-        <h1>Главная страница</h1>
-    )
-}
-function Aboutus(){
+
+
+function AboutUs(){
     return(
         <h1>О нас</h1>
     )
@@ -38,12 +28,11 @@ function ContactUs(){
 }
 function App() {
   return (
-    <div className="App">
+    <div className="container">
         <BrowserRouter>
           <Menu/>
-
-            <Route exact path="/" render={()=><Main/>} />
-            <Route path="/about" render={()=><Aboutus/>} />
+            <Route exact path="/" render={()=><PostList/>} />
+            <Route path="/about" render={()=><AboutUs/>} />
             <Route path="/contact-us" render={()=><ContactUs/>} />
         </BrowserRouter>
     </div>
