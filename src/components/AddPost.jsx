@@ -8,7 +8,8 @@ export class AddPost extends React.Component{
         this.state = {
             title:"",
             text:"",
-            author:""
+            author:"",
+            info:""
         }
     }
     sendForm(event){
@@ -28,6 +29,25 @@ export class AddPost extends React.Component{
     handleInputChange(event){
         const value = event.target.value;
         const name = event.target.name;
+        if (name === "title"){
+            const formData = new FormData();
+            formData.append("title",value)
+            fetch("http://v90377xk.beget.tech/pre/php/checkTitle.php",{
+                method: "POST",
+                body: formData
+            }).then(response=>response.json())
+            .then(result=>{
+                if(result.result === "exist"){
+                    this.setState({
+                      info: "Такой заголовок уже есть!"
+                    })
+                }else{
+                    this.setState({
+                        info: ""
+                    })
+                }
+            })
+        }
         this.setState( {
             [name]:value
         });
@@ -38,6 +58,7 @@ export class AddPost extends React.Component{
         <form onSubmit={this.sendForm}>
             <div className="mb-3">
                 <input value={this.state.title} onChange={this.handleInputChange} name="title" type="text" className="form-control" placeholder="Заголовок статьи"/>
+                <p style={{color:"red"}}>{this.state.info}</p>
             </div>
             <div className="mb-3">
                 <textarea value={this.state.text} onChange={this.handleInputChange} name="text" type="text" className="form-control" placeholder="Текст поста"/>
