@@ -20,7 +20,7 @@ export class PostList extends React.Component{
     componentDidMount() {
         console.log("Компонент PostList отрисован");
 
-        fetch("v90377xk.beget.tech/pre/php/getPosts.php")
+        fetch("http://v90377xk.beget.tech/pre/php/getPosts.php")
 
             .then(response=>response.json())
             .then(result=>{
@@ -28,6 +28,7 @@ export class PostList extends React.Component{
              let rows = [];
              for (let i = 0; i < result.length; i++) {
                  rows.push(<Tr
+                     key={i}
                      index={ i + 1}
                      title={result[i].title}
                      author={result[i].author}
