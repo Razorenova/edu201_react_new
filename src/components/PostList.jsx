@@ -1,41 +1,59 @@
 import React from 'react';
+import {Link} from "react-router-dom";
+
+function Tr(props){
+    return  <tr>
+        <th scope="row">{props.index}</th>
+        <td><Link to="/post">{props.title}</Link></td>
+        <td>{props.author}</td>
+        <td>{props.data_added}</td>
+    </tr>
+}
 
 export class PostList extends React.Component{
+    constructor() {
+        super();
+        this.state = {
+            posts: []
+        }
+    }
     componentDidMount() {
-        console.log("Компонент PostList отрисован")
-        // eslint-disable-next-line no-undef
-        fetch(http://v90377xk.beget.tech/pre/php/getPosts.php)
+        console.log("Компонент PostList отрисован");
+
+        fetch("v90377xk.beget.tech/pre/php/getPosts.php")
+
+            .then(response=>response.json())
+            .then(result=>{
+             console.log(result);
+             let rows = [];
+             for (let i = 0; i < result.length; i++) {
+                 rows.push(<Tr
+                     index={ i + 1}
+                     title={result[i].title}
+                     author={result[i].author}
+                     data_added={result[i].data_added}/>)
+             }
+                 this.setState( {
+                     posts: rows
+                 })
+
+            })
     }
 
     render() {
+
         console.log("Компонент PostList рисуется")
         return <table className="table">
             <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
+                <th scope="col">Заголовок</th>
+                <th scope="col">Автор</th>
+                <th scope="col">Дата добавления</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td colSpan="2">Larry the Bird</td>
-                <td>@twitter</td>
-            </tr>
+            {this.state.posts}
             </tbody>
         </table>
     }

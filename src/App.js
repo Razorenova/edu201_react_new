@@ -4,7 +4,7 @@ import React from 'react';
 import {Route, BrowserRouter, NavLink} from "react-router-dom";
 import {Menu} from "./components/Menu";
 import {PostList} from "./components/PostList";
-
+import {Post} from "./components/Post";
 
 
 
@@ -34,6 +34,7 @@ function App() {
             <Route exact path="/" render={()=><PostList/>} />
             <Route path="/about" render={()=><AboutUs/>} />
             <Route path="/contact-us" render={()=><ContactUs/>} />
+            <Route path="/post" render={()=><Post/>} />
         </BrowserRouter>
     </div>
   );
