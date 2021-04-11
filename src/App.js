@@ -34,7 +34,7 @@ function App() {
           <Menu/>
             <Route exact path="/" render={()=><PostList/>} />
             <Route path="/addPost" render={()=><AddPost/>} />
-            <Route path="/post" render={()=><Post/>} />
+            <Route path="/post/:id" render={(props)=><Post {...props}/>}/>
         </BrowserRouter>
     </div>
   );

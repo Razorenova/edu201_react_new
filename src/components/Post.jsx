@@ -1,8 +1,9 @@
 import React from 'react';
 
 export class Post extends React.Component{
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+
         this.state = {
              title: "Тут будет заголовок",
             text: "",
@@ -14,7 +15,7 @@ export class Post extends React.Component{
     componentDidMount() {
 
         const formData = new FormData();
-        formData.append("id", window.location.pathname.split('/')[2]);
+        formData.append("id", this.props.match.params.id);
         fetch("http://v90377xk.beget.tech/pre/php/getPost.php",{
             method: "POST",
             body: formData
