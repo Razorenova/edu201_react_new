@@ -1,4 +1,5 @@
 import React from 'react';
+import {Redirect} from "react-router-dom";
 
 export class AddPost extends React.Component{
     constructor() {
@@ -9,7 +10,8 @@ export class AddPost extends React.Component{
             title:"",
             text:"",
             author:"",
-            info:""
+            info:"",
+            redirect: false
         }
     }
     sendForm(event){
@@ -23,7 +25,9 @@ export class AddPost extends React.Component{
             body: formData
         }).then(response=>response.json())
             .then(result=>{
-                console.log(result)
+                this.setState( {
+                    redirect: true
+                })
             })
     }
     handleInputChange(event){
@@ -53,6 +57,10 @@ export class AddPost extends React.Component{
         });
     }
     render() {
+        if(this.state.redirect)
+            return <Redirect to="/"/>
+        else
+
         return <div className="col-md-5 my-5 mx-auto">
             <h1 className="text-center my-3">Добавление поста</h1>
         <form onSubmit={this.sendForm}>
