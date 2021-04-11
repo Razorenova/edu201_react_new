@@ -4,7 +4,7 @@ export class Post extends React.Component{
     constructor() {
         super();
         this.state = {
-         title: "Тут будет заголовок",
+             title: "Тут будет заголовок",
             text: "",
             data_added: "",
             author: ""

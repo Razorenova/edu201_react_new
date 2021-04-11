@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 function Tr(props){
     return  <tr>
         <th scope="row">{props.index}</th>
-        <td><Link to="/post">{props.title}</Link></td>
+        <td><Link to={"/post/"+props.id}>{props.title}</Link></td>
         <td>{props.author}</td>
         <td>{props.data_added}</td>
     </tr>
@@ -30,6 +30,7 @@ export class PostList extends React.Component{
                  rows.push(<Tr
                      key={i}
                      index={ i + 1}
+                     id={result[i].id}
                      title={result[i].title}
                      author={result[i].author}
                      data_added={result[i].data_added}/>)
