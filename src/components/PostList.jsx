@@ -15,8 +15,8 @@ function Tr(props) {
                 body: formData
             }).then(response=>response.json())
                 .then(result=>{
-                    let posts = props.parent.state.posts
-                    posts[props.index-1] = '';
+                    let posts = props.parent.state.posts;
+                    posts.splice(props.index-1,1 ) ;
                     props.parent.setState({
                     posts:posts
                     })

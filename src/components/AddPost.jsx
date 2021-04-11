@@ -37,9 +37,16 @@ export class AddPost extends React.Component{
     handleInputChange(event){
         const value = event.target.value;
         const name = event.target.name;
-        if (name === "title"){
-            if(value === ""){ this.setState({    submitBtn: "disabled" })}
+        this.setState( {
+            [name]:value
+        })
 
+        if (name === "title"){
+            if(value === ""){
+                this.setState({submitBtn: "disabled" })
+
+                return ;
+            }
             const formData = new FormData();
             formData.append("title",value)
             fetch("http://v90377xk.beget.tech/pre/php/checkTitle.php",{
@@ -60,9 +67,7 @@ export class AddPost extends React.Component{
                 }
             })
         }
-        this.setState( {
-            [name]:value
-        });
+
     }
     render() {
         if(this.state.redirect)
