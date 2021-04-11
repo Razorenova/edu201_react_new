@@ -14,7 +14,7 @@ export class Post extends React.Component{
     componentDidMount() {
 
         const formData = new FormData();
-        formData.append("id", 1);
+        formData.append("id", window.location.pathname.split('/')[2]);
         fetch("http://v90377xk.beget.tech/pre/php/getPost.php",{
             method: "POST",
             body: formData
