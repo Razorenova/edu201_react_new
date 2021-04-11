@@ -11,11 +11,14 @@ export class AddPost extends React.Component{
             text:"",
             author:"",
             info:"",
-            redirect: false
+            redirect: false,
+            submitBtn: "disabled"
         }
     }
     sendForm(event){
         event.preventDefault();
+        if(this.state.info == ""){
+
         const formData = new FormData();
         formData.append( "title", this.state.title)
         formData.append( "text", this.state.text)
@@ -29,6 +32,7 @@ export class AddPost extends React.Component{
                     redirect: true
                 })
             })
+        }
     }
     handleInputChange(event){
         const value = event.target.value;
@@ -43,11 +47,13 @@ export class AddPost extends React.Component{
             .then(result=>{
                 if(result.result === "exist"){
                     this.setState({
-                      info: "Такой заголовок уже есть!"
+                      info: "Такой заголовок уже есть!",
+                        submitBtn: "disabled"
                     })
                 }else{
                     this.setState({
-                        info: ""
+                        info: "",
+                        submitBtn: ""
                     })
                 }
             })
@@ -76,7 +82,7 @@ export class AddPost extends React.Component{
                 <input value={this.state.author} onChange={this.handleInputChange} name="author"type="text" className="form-control" placeholder="authtor"/>
             </div>
             <div className="mb-3">
-                <input type="submit" className="form-control btn btn-primary" value="Добавить"/>
+                <input type="submit" disabled={this.state.submitBtn} className="form-control btn btn-primary" value="Добавить"/>
             </div>
         </form>
         </div>
